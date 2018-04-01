@@ -1,26 +1,32 @@
 //calling library 
 const express = require('express')
+
+const path=require('path')
+
+const bodyParser=require('body-parser')
 // execute express
 const app=express()
+//initiate default port
+const defaultPort=3000
+//import route dari config/routes
+const router=require('./config/routes')
 
-//fungsi helloworld
-const helloworld = (request, respond)=>
-respond.send('hello world')
+//set static front end
+app.use(express.static(path.join(__dirname,'public')))
+app.use('/node_modules', express.static(__dirname + 'node_modules'))
 
-//fungsi user get name dan adress
-const userFunction=(req, res)=>{
-const {name, address}=req.params
-res
-    .status(200)
-    .json({
-        name,
-        address,
-    })
-}
 
-//get root request
-app.get('/',helloworld)
+//parsing body
+app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.json())
 
-app.get('/:name/:address',userFunction)
+
+
+//add router to express
+app.use('/api', router)
 // set express to running on port 3000
-app.listen(3000)
+const server =app.listen(defaultPort,()=>{
+    const port=server.address().port
+
+    console.log(`magic happen on port:${port}`)
+})

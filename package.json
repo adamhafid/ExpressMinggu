@@ -3,18 +3,16 @@
   "version": "1.0.0",
   "main": "Main.js",
   "scripts": {
-    "start": "node Server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "nodemon": "^1.17.3"
-  },
-  "scripts":{
-    "start": "nodemon server.js"
   }
 }
